@@ -19,7 +19,7 @@ O foco técnico deste projeto é a introdução ao design de software, encapsula
 - **Saúde:** Avalia o status geral do aluno combinando o estado da saúde física e mental (boa ou fraca).
 
 ### 🌟 Funcionalidades Bônus (Opcionais Implementadas)
-- [ ] Cálculo de média ponderada com array de pesos.
+- [x] Cálculo de média ponderada com array de pesos.
 - [ ] Histórico detalhado dos últimos 5 lanches na cantina.
 - [ ] Inclusão de emojis para refletir o humor atual no status de saúde.
 - [ ] Suporte a múltiplos alunos simultaneamente.

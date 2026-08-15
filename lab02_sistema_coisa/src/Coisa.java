@@ -44,5 +44,25 @@ public class Coisa {
         saude.defineSaudeMental("boa");
         saude.defineSaudeFisica("fraca");
         System.out.println(saude.getStatusGeral());
+
+        // Bônus 5.1
+        Disciplina prog3 = new Disciplina("PROGRAMACA 3", 5);
+        prog3.cadastraNota(1, 7.8);
+        prog3.cadastraNota(2, 5.9);
+        prog3.cadastraNota(3, 6.6);
+        prog3.cadastraNota(4, 8.1);
+        prog3.cadastraNota(5, 6.8);
+        System.out.println(prog3);
+        System.out.println(prog3.aprovado());
+
+        Disciplina prog4 = new Disciplina("PROGRAMACA 4", 5, new int[]{2, 4, 1, 1, 2});
+        prog4.cadastraNota(1, 7.8);
+        prog4.cadastraNota(2, 5.9);
+        prog4.cadastraNota(3, 6.6);
+        prog4.cadastraNota(4, 8.1);
+        prog4.cadastraNota(5, 6.8);
+        System.out.println(prog4);
+        System.out.println(prog4.aprovado());
+
     }
 }
