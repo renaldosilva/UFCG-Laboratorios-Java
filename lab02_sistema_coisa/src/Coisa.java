@@ -64,5 +64,16 @@ public class Coisa {
         System.out.println(prog4);
         System.out.println(prog4.aprovado());
 
+        // Bônus 5.2
+        ContaCantina cantinaSeuLazaro = new ContaCantina("Seu Lázaro");
+        cantinaSeuMatias.cadastraLanche(4, 600, "4 coxinhas de frango.");
+        cantinaSeuMatias.cadastraLanche(1, 150, "1 xícara de café com leite.");
+        cantinaSeuMatias.cadastraLanche(1, 500, "1 pastel de frango.");
+        cantinaSeuMatias.cadastraLanche(2, 300, "2 fatias de bolo.");
+        cantinaSeuMatias.cadastraLanche(1, 200, "1 suco de maracujá.");
+        cantinaSeuMatias.cadastraLanche(1, 350, "1 coxinha e 1 suco.");
+        System.out.println(cantinaSeuMatias.listarDetalhes()
+        );
+
     }
 }

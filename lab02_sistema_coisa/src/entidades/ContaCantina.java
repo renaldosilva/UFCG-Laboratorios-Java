@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.ArrayList;
+
 /**
  * Representação de uma conta de cantina (UFCG).
  */
@@ -26,6 +28,11 @@ public class ContaCantina {
     private int totalItensConsumidos;
 
     /**
+     * A descrição dos lanches que foram consumidos na cantina.
+     */
+    private ArrayList<String> detalhes;
+
+    /**
      * Constroi uma cantina a partir do seu nome.
      *
      * @param nome o nome da cantina.
@@ -35,6 +42,7 @@ public class ContaCantina {
         this.debito = 0;
         this.totalGastos = 0;
         this.totalItensConsumidos = 0;
+        this.detalhes = new ArrayList<>();
     }
 
     /**
@@ -49,6 +57,36 @@ public class ContaCantina {
             this.totalGastos += valor;
             this.debito += valor;
         }
+    }
+
+    /**
+     * Cadastra um lanche feito na cantina e a sua descrição. Somente os detalhes dos últimos
+     * 5 lanches são armazenados.
+     *
+     * @param quantidadeItens a quantidade de itens que foram consumidos.
+     * @param valor o valor total em centavos do lanche.
+     * @param detalhes a descrição do lanche.
+     */
+    public void cadastraLanche(int quantidadeItens, int valor, String detalhes) {
+        this.cadastraLanche(quantidadeItens, valor);
+        this.detalhes.add(detalhes);
+
+        if (this.detalhes.size() > 5) {
+            this.detalhes.removeFirst();
+        }
+    }
+
+    /**
+     * Retorna uma string com os últimos 5 detalhes dos lanches feitos na cantina, um em cada linha.
+     *
+     * @return a descrição dos últimos 5 lanches feitos.
+     */
+    public String listarDetalhes() {
+        StringBuilder detalhes = new StringBuilder();
+        for (String detalhe : this.detalhes) {
+            detalhes.append(detalhe).append("\n");
+        }
+        return detalhes.toString().trim();
     }
 
     /**
