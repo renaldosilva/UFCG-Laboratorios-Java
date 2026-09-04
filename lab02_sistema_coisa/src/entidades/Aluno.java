@@ -19,6 +19,11 @@ public class Aluno {
     private HashMap<String, ContaLaboratorio> laboratorios;
 
     /**
+     * Mapa de disciplinas do aluno, onde a chave é o nome da disciplina.
+     */
+    private HashMap<String, Disciplina> disciplinas;
+
+    /**
      * Constrói um aluno a partir do seu nome. Inicializa as coleções de laboratórios, disciplinas e cantinas como vazias,
      * e a saúde com os valores padrão (boa).
      *
@@ -32,6 +37,7 @@ public class Aluno {
 
         this.nome = nome;
         this.laboratorios = new HashMap<>();
+        this.disciplinas = new HashMap<>();
     }
 
     /**
@@ -112,6 +118,99 @@ public class Aluno {
             return this.laboratorios.get(nomeLaboratorio).toString();
         }
         return "Laboratório não encontrado";
+    }
+
+    /**
+     * Cadastra uma nova disciplina para o aluno a partir do nome.
+     * O cadastro só é realizado se o nome for válido e disciplina ainda não existir.
+     *
+     * @param nomeDisciplina o nome da disciplina.
+     */
+    public void cadastraDisciplina(String nomeDisciplina) {
+        if (this.validaNome(nomeDisciplina) && !this.disciplinas.containsKey(nomeDisciplina)) {
+            Disciplina disciplina = new Disciplina(nomeDisciplina);
+            this.disciplinas.put(nomeDisciplina, disciplina);
+        }
+    }
+
+    /**
+     * Cadastra uma nova disciplina para o aluno com uma quantidade específica de notas.
+     *
+     * @param nomeDisciplina o nome da disciplina.
+     * @param quantidadeNotas a quantidade de notas da disciplina.
+     */
+    public void cadastraDisciplina(String nomeDisciplina, int quantidadeNotas) {
+        if (this.validaNome(nomeDisciplina) && !this.disciplinas.containsKey(nomeDisciplina)) {
+            Disciplina disciplina = new Disciplina(nomeDisciplina, quantidadeNotas);
+            this.disciplinas.put(nomeDisciplina, disciplina);
+        }
+    }
+
+    /**
+     * Cadastra uma nova disciplina para o aluno com quantidade de notas e pesos específicos.
+     *
+     * @param nomeDisciplina o nome da disciplina.
+     * @param quantidadeNotas a quantidade de notas da disciplina.
+     * @param pesoNotas os pesos de cada nota.
+     */
+    public void cadastraDisciplina(String nomeDisciplina, int quantidadeNotas, int[] pesoNotas) {
+        if (this.validaNome(nomeDisciplina) && !this.disciplinas.containsKey(nomeDisciplina)) {
+            Disciplina disciplina = new Disciplina(nomeDisciplina, quantidadeNotas, pesoNotas);
+            this.disciplinas.put(nomeDisciplina, disciplina);
+        }
+    }
+
+    /**
+     * Cadastra as horas de estudo da disciplina de forma cumulativa.
+     *
+     * @param nomeDisciplina o nome da disciplina.
+     * @param horas as horas de estudo da disciplina.
+     */
+    public void cadastraHoras(String nomeDisciplina, int horas) {
+        if (this.validaNome(nomeDisciplina) && this.disciplinas.containsKey(nomeDisciplina)) {
+            this.disciplinas.get(nomeDisciplina).cadastraHoras(horas);
+        }
+    }
+
+    /**
+     * Cadastra nota obtida na disciplina. É possível cadastrar N notas diferentes, indo de 1 a N respectivamente.
+     * Cada nota vai de 0.0 até 10.0.
+     *
+     * @param nomeDisciplina o nome da disciplina.
+     * @param nota a nota correspondente (1, 2, 3, ..., N).
+     * @param valorNota o valor da nota (0.0 até 10.0).
+     */
+    public void cadastraNota(String nomeDisciplina, int nota, double valorNota) {
+        if (this.validaNome(nomeDisciplina) && this.disciplinas.containsKey(nomeDisciplina)) {
+            this.disciplinas.get(nomeDisciplina).cadastraNota(nota, valorNota);
+        }
+    }
+
+    /**
+     * Verifica se o aluno foi aprovado na disciplina! Para ser aprovado, a média precisa
+     * ser maior ou igual a 7.0.
+     *
+     * @param nomeDisciplina o nome da disciplina.
+     * @return true se foi aprovado, false caso contrário.
+     */
+    public boolean aprovado(String nomeDisciplina) {
+        if (this.validaNome(nomeDisciplina) && this.disciplinas.containsKey(nomeDisciplina)) {
+            return this.disciplinas.get(nomeDisciplina).aprovado();
+        }
+        return false;
+    }
+
+    /**
+     * Retorna a String que representa a disciplina cadastrada pelo aluno.
+     *
+     * @param nomeDisciplina o nome da disciplina.
+     * @return a representação em String da disciplina ou "Disciplina não encontrada" se não existir.
+     */
+    public String disciplinaToString(String nomeDisciplina) {
+        if (this.validaNome(nomeDisciplina) && this.disciplinas.containsKey(nomeDisciplina)) {
+            return this.disciplinas.get(nomeDisciplina).toString();
+        }
+        return "Disciplina não encontrada";
     }
 
     /**

@@ -110,5 +110,29 @@ public class Coisa {
 
         System.out.println("\n-> Teste de Segurança:");
         System.out.println(jose.laboratorioToString("LCC2"));
+
+        System.out.println("\n----- TESTE DE DISCIPLINAS -----");
+
+        jose.cadastraDisciplina("Programacao 2");
+        jose.cadastraHoras("Programacao 2", 15);
+        jose.cadastraNota("Programacao 2", 1, 8.0);
+        jose.cadastraNota("Programacao 2", 2, 6.0);
+
+        int[] pesosMaria = {4, 6};
+        maria.cadastraDisciplina("Programacao 2", 2, pesosMaria);
+        maria.cadastraHoras("Programacao 2", 30);
+        maria.cadastraNota("Programacao 2", 1, 5.0);
+        maria.cadastraNota("Programacao 2", 2, 9.0);
+
+        System.out.println("-> Disciplinas do José:");
+        System.out.println(jose.disciplinaToString("Programacao 2"));
+        System.out.println("José está aprovado? " + jose.aprovado("Programacao 2"));
+
+        System.out.println("\n-> Disciplinas da Maria:");
+        System.out.println(maria.disciplinaToString("Programacao 2"));
+        System.out.println("Maria está aprovada? " + maria.aprovado("Programacao 2"));
+
+        System.out.println("\n-> Teste de Segurança Disciplina:");
+        System.out.println(jose.disciplinaToString("Estrutura de Dados"));
     }
 }
