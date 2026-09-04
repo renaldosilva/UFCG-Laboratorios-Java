@@ -75,5 +75,14 @@ public class Coisa {
         System.out.println(cantinaSeuMatias.listarDetalhes()
         );
 
+        // Bônus 5.3
+        Saude saude2 = new Saude();
+        System.out.println(saude2.getStatusGeral());
+        saude2.defineSaudeMental("boa");
+        saude2.defineSaudeFisica("boa");
+        saude2.definirEmoji(":D");
+        System.out.println(saude2.getStatusGeral());
+        saude2.defineSaudeFisica("fraca");
+        System.out.println(saude2.getStatusGeral());
     }
 }

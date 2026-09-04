@@ -16,33 +16,69 @@ public class Saude {
     private String saudeFisica;
 
     /**
-     * Constroi a saúde de um aluno(a). Por padrão a saúde mental e física começam com o valor boa.
+     * ‘Emoji’ que representa o último sentimento do aluno.
+     * Pode assumir os valores: “:(”, “*_*”, “:o)”,“<(^_^<)”, “¯\_(ツ)_/¯”, ...
+     */
+    private String emoji;
+
+    /**
+     * Constroi a saúde de um aluno(a). Por padrão a saúde mental e física começam com o valor boa e o emoji vazio.
      */
     public Saude() {
         this.saudeMental = "boa";
         this.saudeFisica = "boa";
+        this.emoji = "";
     }
 
     /**
      * Define a saúde mental do aluno(a). É possível definir somente dois valores, boa ou fraca.
+     * Sempre que a saúde mental sofrer alteração, o emoji que representa o sentimento geral do aluno
+     * é redefinido.
      *
      * @param valor o valor que representa a saúde mental do aluno(a).
      */
     public void defineSaudeMental(String valor) {
         if (this.validaIndicadorSaude(valor)) {
-            this.saudeMental = valor;
+            if (!this.saudeMental.equals(valor)) {
+                this.saudeMental = valor;
+                this.removeEmoji();
+            }
         }
     }
 
     /**
      * Define a saúde física do aluno(a). É possível definir somente dois valores, boa ou fraca.
+     * Sempre que a saúde física sofrer alteração, o emoji que representa o sentimento geral do aluno
+     * é redefinido.
      *
      * @param valor o valor que representa a saúde física do aluno(a).
      */
     public void defineSaudeFisica(String valor) {
         if (this.validaIndicadorSaude(valor)) {
-            this.saudeFisica = valor;
+            if (!this.saudeFisica.equals(valor)) {
+                this.saudeFisica = valor;
+                this.removeEmoji();
+            }
         }
+    }
+
+    /**
+     * Define o emoji que representa o sentimento geral do aluno.
+     * Pode assumir os valores: “:(”, “*_*”, “:o)”,“<(^_^<)”, “¯\_(ツ)_/¯”, ...
+     *
+     * @param emoji o emoji que representa o sentimento geral do aluno.
+     */
+    public void definirEmoji(String emoji) {
+        if (emoji != null && !emoji.isEmpty()) {
+            this.emoji = emoji;
+        }
+    }
+
+    /**
+     * Remove o emoji que representa o sentimento geral do aluno. O valor passa a ser vazio.
+     */
+    private void removeEmoji() {
+        this.emoji = "";
     }
 
     /**
@@ -63,15 +99,25 @@ public class Saude {
      * Para saúde mental fraca e saúde física fraca, o retorno é "fraca".
      * Para quando apenas um dos indicadores de saúde for fraco, o retorno é "ok".
      *
+     * Um emoji que representa o sentimento geral do aluno é retornado junto, caso exista.
+     *
      * @return o status geral de saúde do aluno(a).
      */
     public String getStatusGeral() {
+        String statusGeral = "";
+
         if (this.saudeMental.equals("boa") && this.saudeFisica.equals("boa")) {
-            return "boa";
+            statusGeral = "boa";
         } else if (this.saudeMental.equals("fraca") && this.saudeFisica.equals("fraca")) {
-            return "fraca";
+            statusGeral = "fraca";
         } else {
-            return "ok";
+            statusGeral = "ok";
         }
+
+        if (!this.emoji.isEmpty()) {
+            statusGeral = statusGeral + " " + this.emoji;
+        }
+
+        return statusGeral;
     }
 }
