@@ -24,7 +24,8 @@ public class Disciplina {
     private double[] notas;
 
     /**
-     * Pesos das notas da disciplina para cálculo de média ponderada. Pode ser nulo.
+     * Pesos das notas da disciplina para cálculo de média ponderada.
+     * Se não informado, todas as notas terão peso 1 (média aritmética).
      */
     private int[] pesoNotas;
 
@@ -49,17 +50,44 @@ public class Disciplina {
     }
 
     /**
-     * Constroi uma disciplina a partir do seu nome, quantidade de notas e peso das notas.
+     * Constrói uma disciplina a partir do seu nome, quantidade de notas e o peso de cada nota.
      *
      * @param nome o nome da disciplina.
      * @param quantidadeNotas a quantidade de notas da disciplina.
-     * @param pesoNotas o array com os pesos de cada nota.
+     * @param pesoNotas o array com os pesos de cada nota (pode ser null).
+     * @throws IllegalArgumentException caso o nome seja nulo/vazio, a quantidade de notas for inválida,
+     *                                  ou, caso os pesos sejam informados, a quantidade de pesos for diferente
+     *                                  da quantidade de notas, ou houver algum peso menor ou igual a zero.
      */
     public Disciplina(String nome, int quantidadeNotas, int[] pesoNotas) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome da disciplina não pode ser nulo ou vazio.");
+        }
+
+        if (quantidadeNotas <= 0) {
+            throw new IllegalArgumentException("A quantidade de notas não pode ser menor ou igual a 0.");
+        }
+
+        if (pesoNotas == null) {
+            this.pesoNotas = new int[quantidadeNotas];
+            for (int i = 0; i < quantidadeNotas; i++) {
+                this.pesoNotas[i] = 1;
+            }
+        } else {
+            if (pesoNotas.length != quantidadeNotas) {
+                throw new IllegalArgumentException("A quantidade de pesos deve ser exatamente igual à quantidade de notas.");
+            }
+            for (int peso : pesoNotas) {
+                if (peso <= 0) {
+                    throw new IllegalArgumentException("O peso de cada nota deve ser maior que zero.");
+                }
+            }
+            this.pesoNotas = pesoNotas;
+        }
+
         this.nome = nome;
         this.horasEstudo = 0;
         this.notas = new double[quantidadeNotas];
-        this.pesoNotas = pesoNotas;
     }
 
     /**
@@ -99,27 +127,21 @@ public class Disciplina {
     }
 
     /**
-     * Método auxiliar privado para calcular a média do aluno na disciplina.
+     * Método auxiliar para calcular a média do aluno na disciplina.
+     * Sempre utiliza a lógica de média ponderada (usando peso 1 para média aritmética padrão).
      *
-     * @return a média ponderada caso os pesos das notas tenham sido informados
-     * ou a média aritmética, caso contrário.
+     * @return a média da disciplina.
      */
     private double calculaMedia() {
-        if (this.pesoNotas != null) {
-            double media = 0;
-            int totalPeso = 0;
-            for (int i = 0; i < this.pesoNotas.length; i++) {
-                totalPeso += this.pesoNotas[i];
-                media += this.notas[i] * this.pesoNotas[i];
-            }
-            return media / totalPeso;
-        } else {
-            double soma = 0;
-            for (double nota : this.notas) {
-                soma += nota;
-            }
-            return soma / this.notas.length;
+        double media = 0;
+        int totalPeso = 0;
+
+        for (int i = 0; i < this.pesoNotas.length; i++) {
+            totalPeso += this.pesoNotas[i];
+            media += this.notas[i] * this.pesoNotas[i];
         }
+
+        return media / totalPeso;
     }
 
     /**
