@@ -84,5 +84,31 @@ public class Coisa {
         System.out.println(saude2.getStatusGeral());
         saude2.defineSaudeFisica("fraca");
         System.out.println(saude2.getStatusGeral());
+
+        // Bônus 5.4
+        System.out.println("----- TESTE BÔNUS 5.4: MÚLTIPLOS ALUNOS -----");
+
+        Aluno jose = new Aluno("José");
+        jose.cadastraLaboratorio("LCC1");
+        jose.cadastraLaboratorio("LCC3", 1000);
+        jose.consomeEspaco("LCC1", 500);
+
+        Aluno maria = new Aluno("Maria");
+        maria.cadastraLaboratorio("LCC1");
+        maria.consomeEspaco("LCC1", 1990);
+
+        System.out.println("-> Laboratórios do José:");
+        System.out.println(jose.laboratorioToString("LCC1"));
+        System.out.println(jose.laboratorioToString("LCC3"));
+
+        System.out.println("\n-> Laboratórios da Maria:");
+        System.out.println(maria.laboratorioToString("LCC1"));
+        System.out.println("Maria atingiu a cota no LCC1? " + maria.atingiuCota("LCC1"));
+
+        maria.consomeEspaco("LCC1", 20);
+        System.out.println("E agora, atingiu a cota? " + maria.atingiuCota("LCC1"));
+
+        System.out.println("\n-> Teste de Segurança:");
+        System.out.println(jose.laboratorioToString("LCC2"));
     }
 }
