@@ -134,5 +134,20 @@ public class Coisa {
 
         System.out.println("\n-> Teste de Segurança Disciplina:");
         System.out.println(jose.disciplinaToString("Estrutura de Dados"));
+
+        System.out.println("\n----- TESTE DE CANTINAS -----");
+
+        jose.cadastraCantina("Seu Matias");
+        jose.cadastraLanche("Seu Matias", 2, 1000);
+
+        System.out.println("-> Falta pagar no Seu Matias (José): " + jose.getFaltaPagar("Seu Matias") + " centavos");
+        System.out.println(jose.cantinaToString("Seu Matias"));
+
+        jose.pagarConta("Seu Matias", 500);
+        System.out.println("-> Após pagar 5 reais, falta pagar: " + jose.getFaltaPagar("Seu Matias") + " centavos");
+
+        System.out.println("-> Consultando cantina que não existe: " + jose.cantinaToString("Cantina Central"));
+        System.out.println("-> Falta pagar em cantina inexistente: " + jose.getFaltaPagar("Cantina Central"));
+
     }
 }

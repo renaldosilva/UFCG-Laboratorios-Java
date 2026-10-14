@@ -24,8 +24,12 @@ public class Aluno {
     private HashMap<String, Disciplina> disciplinas;
 
     /**
-     * Constrói um aluno a partir do seu nome. Inicializa as coleções de laboratórios, disciplinas e cantinas como vazias,
-     * e a saúde com os valores padrão (boa).
+     * Mapa das contas de cantina do aluno, onde a chave é o nome da cantina.
+     */
+    private HashMap<String, ContaCantina> cantinas;
+
+    /**
+     * Constrói um aluno a partir do seu nome. Inicializa as coleções de laboratórios, disciplinas e cantinas como vazias.
      *
      * @param nome o nome do aluno.
      * @throws IllegalArgumentException caso o nome do aluno seja nulo ou vazio.
@@ -38,6 +42,7 @@ public class Aluno {
         this.nome = nome;
         this.laboratorios = new HashMap<>();
         this.disciplinas = new HashMap<>();
+        this.cantinas = new HashMap<>();
     }
 
     /**
@@ -122,7 +127,7 @@ public class Aluno {
 
     /**
      * Cadastra uma nova disciplina para o aluno a partir do nome.
-     * O cadastro só é realizado se o nome for válido e disciplina ainda não existir.
+     * O cadastro só é realizado se o nome for válido e a disciplina ainda não existir.
      *
      * @param nomeDisciplina o nome da disciplina.
      */
@@ -211,6 +216,72 @@ public class Aluno {
             return this.disciplinas.get(nomeDisciplina).toString();
         }
         return "Disciplina não encontrada";
+    }
+
+    /**
+     * Cadastra uma nova conta de cantina do aluno a partir do nome da cantina.
+     *
+     * @param nomeCantina o nome da cantina.
+     */
+    public void cadastraCantina(String nomeCantina) {
+        if (this.validaNome(nomeCantina) && !this.cantinas.containsKey(nomeCantina)) {
+            ContaCantina cantina = new ContaCantina(nomeCantina);
+            this.cantinas.put(nomeCantina, cantina);
+        }
+    }
+
+    /**
+     * Cadastra um lanche feito numa cantina a partir da quantidade de itens e o valor gasto.
+     * O lanche só será cadastrado se os valores forem positivos.
+     *
+     * @param nomeCantina o nome da cantina.
+     * @param quantidadeItens a quantidade de itens.
+     * @param valor o valor em centavos do lanche.
+     */
+    public void cadastraLanche(String nomeCantina, int quantidadeItens, int valor) {
+        if (this.validaNome(nomeCantina) && this.cantinas.containsKey(nomeCantina)) {
+            this.cantinas.get(nomeCantina).cadastraLanche(quantidadeItens, valor);
+        }
+    }
+
+    /**
+     * Realiza o pagamento do valor em débito na cantina. O valor só será aceito se for maior que zero
+     * e menor ou igual ao valor do débito.
+     *
+     * @param nomeCantina o nome da cantina.
+     * @param valor o valor em centavos.
+     */
+    public void pagarConta(String nomeCantina, int valor) {
+        if (this.validaNome(nomeCantina) && this.cantinas.containsKey(nomeCantina)) {
+            this.cantinas.get(nomeCantina).pagaConta(valor);
+        }
+    }
+
+    /**
+     * Retorna o valor em centavos que está em débito na cantina.
+     *
+     * @param nomeCantina o nome da cantina.
+     * @return o valor em centavos que está em débito ou -1 caso a conta na cantina não exista.
+     */
+    public int getFaltaPagar(String nomeCantina) {
+        if (this.validaNome(nomeCantina) && this.cantinas.containsKey(nomeCantina)) {
+            return this.cantinas.get(nomeCantina).getFaltaPagar();
+        }
+        return -1;
+    }
+
+    /**
+     * Retorna a String que representa uma cantina. A representação segue o formato:
+     * "NomeDaCantina totalDeItensConsumidos TotalGasto".
+     *
+     * @param nomeCantina o nome da cantina.
+     * @return a representação em String da cantina ou "" (vazio) caso a conta na cantina não exista.
+     */
+    public String cantinaToString(String nomeCantina) {
+        if (this.validaNome(nomeCantina) && this.cantinas.containsKey(nomeCantina)) {
+            return this.cantinas.get(nomeCantina).toString();
+        }
+        return "";
     }
 
     /**
