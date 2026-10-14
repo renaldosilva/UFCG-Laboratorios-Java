@@ -33,11 +33,16 @@ public class ContaCantina {
     private ArrayList<String> detalhes;
 
     /**
-     * Constroi uma cantina a partir do seu nome.
+     * Constrói uma cantina a partir do seu nome.
      *
      * @param nome o nome da cantina.
+     * @throws IllegalArgumentException caso o nome seja nulo/vazio.
      */
     public ContaCantina(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome da cantina não pode ser nulo ou vazio.");
+        }
+
         this.nome = nome;
         this.debito = 0;
         this.totalGastos = 0;
@@ -46,7 +51,8 @@ public class ContaCantina {
     }
 
     /**
-     * Cadastra um lanche feito na cantina.
+     * Cadastra um lanche feito na cantina. O lanche só será cadastrado caso os valores
+     * passados sejam positivos.
      *
      * @param quantidadeItens a quantidade de itens que foram consumidos.
      * @param valor o valor total em centavos do lanche.
@@ -111,8 +117,8 @@ public class ContaCantina {
     }
 
     /**
-     * Retorna a String que representa uma cantina. A representação segue o formato,
-     * "NomeDaCantina totalDeItensConsumidos TotalGasto"
+     * Retorna a String que representa uma cantina. A representação segue o formato:
+     * "NomeDaCantina totalDeItensConsumidos TotalGasto".
      *
      * @return a representação em String da cantina.
      */
