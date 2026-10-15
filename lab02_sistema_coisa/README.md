@@ -23,7 +23,7 @@ O foco técnico deste projeto é a introdução ao design de software, encapsula
 - [x] Histórico detalhado dos últimos 5 lanches na cantina.
 - [x] Inclusão de emojis para refletir o humor atual no status de saúde.
 - [x] Suporte a múltiplos alunos simultaneamente.
-- [ ] Interface via Linha de Comando (CLI).
+- [x] Interface via Linha de Comando (CLI).
 
 ## 🧠 Conceitos de OO Exercitados
 - Criação de Classes Básicas e Construtores.
