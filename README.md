@@ -7,7 +7,8 @@ Este repositório contém as soluções dos laboratórios desenvolvidos na disci
 | Lab | Título                                 | Descrição Curta                                | Status             |
 |---|----------------------------------------|------------------------------------------------|--------------------|
 | 01 | Introdução Java                        | Conceitos iniciais da linguagem.               | ---                |
-| 02 | [Sistema COISA](./lab02_sistema_coisa) | Controle Institucional da Situação Acadêmica.  | ⚙️ andamento |
+| 02 | [Sistema COISA](./lab02_sistema_coisa) | Controle Institucional da Situação Acadêmica.  | ✅ Concluído |
+| 03 | [Agenda de Contatos](./lab03_agenda_de_contatos) | Agenda de Contatos.                            | ⚙️ Andamento |
 
 ## 💻 Tecnologias e Ferramentas
 - **Linguagem:** Java 25+
