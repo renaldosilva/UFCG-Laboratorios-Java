@@ -29,6 +29,11 @@ public class Aluno {
     private HashMap<String, ContaCantina> cantinas;
 
     /**
+     * Representação da saúde de um aluno(a).
+     */
+    private Saude saude;
+
+    /**
      * Constrói um aluno a partir do seu nome. Inicializa as coleções de laboratórios, disciplinas e cantinas como vazias.
      *
      * @param nome o nome do aluno.
@@ -43,6 +48,7 @@ public class Aluno {
         this.laboratorios = new HashMap<>();
         this.disciplinas = new HashMap<>();
         this.cantinas = new HashMap<>();
+        this.saude = new Saude();
     }
 
     /**
@@ -282,6 +288,52 @@ public class Aluno {
             return this.cantinas.get(nomeCantina).toString();
         }
         return "";
+    }
+
+    /**
+     * Define a saúde mental do aluno(a). É possível definir somente dois valores, boa ou fraca.
+     * Sempre que a saúde mental sofrer alteração, o emoji que representa o sentimento geral do aluno
+     * é redefinido.
+     *
+     * @param valor o valor que representa a saúde mental do aluno(a).
+     */
+    public void defineSaudeMental(String valor) {
+        this.saude.defineSaudeMental(valor);
+    }
+
+    /**
+     * Define a saúde física do aluno(a). É possível definir somente dois valores, boa ou fraca.
+     * Sempre que a saúde física sofrer alteração, o emoji que representa o sentimento geral do aluno
+     * é redefinido.
+     *
+     * @param valor o valor que representa a saúde física do aluno(a).
+     */
+    public void defineSaudeFisica(String valor) {
+        this.saude.defineSaudeFisica(valor);
+    }
+
+    /**
+     * Retorna o estado geral de saúde do aluno(a) com base na sua saúde mental e física.
+     *
+     * Para saúde mental boa e saúde física boa, o retorno é "boa".
+     * Para saúde mental fraca e saúde física fraca, o retorno é "fraca".
+     * Para quando apenas um dos indicadores de saúde for fraco, o retorno é "ok".
+     *
+     * Um emoji que representa o sentimento geral do aluno é retornado junto, caso exista.
+     *
+     * @return o status geral de saúde do aluno(a).
+     */
+    public String getStatusGeral() {
+        return this.saude.getStatusGeral();
+    }
+
+    /**
+     * Define o emoji que representa o sentimento geral do aluno.
+     *
+     * @param emoji o emoji que representa o sentimento geral do aluno.
+     */
+    public void definirEmoji(String emoji) {
+        this.saude.definirEmoji(emoji);
     }
 
     /**

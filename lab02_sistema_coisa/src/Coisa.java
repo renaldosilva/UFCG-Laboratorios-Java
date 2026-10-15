@@ -149,5 +149,22 @@ public class Coisa {
         System.out.println("-> Consultando cantina que não existe: " + jose.cantinaToString("Cantina Central"));
         System.out.println("-> Falta pagar em cantina inexistente: " + jose.getFaltaPagar("Cantina Central"));
 
+        System.out.println("\n----- TESTE DE SAÚDE -----");
+
+        System.out.println("-> Status geral inicial de José: " + jose.getStatusGeral());
+
+        jose.defineSaudeFisica("fraca");
+        System.out.println("-> Após saúde física fraca: " + jose.getStatusGeral());
+
+        jose.definirEmoji(":(");
+        System.out.println("-> Com emoji triste: " + jose.getStatusGeral());
+
+        jose.defineSaudeMental("fraca");
+        System.out.println("-> Após saúde mental fraca (deve limpar o emoji): " + jose.getStatusGeral());
+
+        jose.defineSaudeMental("BOA");
+        jose.defineSaudeFisica("Boa");
+        System.out.println("-> Após restaurar com 'BOA' e 'Boa': " + jose.getStatusGeral());
+
     }
 }

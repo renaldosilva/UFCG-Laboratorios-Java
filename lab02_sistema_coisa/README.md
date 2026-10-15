@@ -22,7 +22,7 @@ O foco técnico deste projeto é a introdução ao design de software, encapsula
 - [x] Cálculo de média ponderada com array de pesos.
 - [x] Histórico detalhado dos últimos 5 lanches na cantina.
 - [x] Inclusão de emojis para refletir o humor atual no status de saúde.
-- [ ] Suporte a múltiplos alunos simultaneamente.
+- [x] Suporte a múltiplos alunos simultaneamente.
 - [ ] Interface via Linha de Comando (CLI).
 
 ## 🧠 Conceitos de OO Exercitados
